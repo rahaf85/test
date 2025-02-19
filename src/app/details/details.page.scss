@@ -20,6 +20,7 @@ ion-toolbar.header {
     padding-bottom: 10px;
   }
   
+
   img { 
     position: absolute;
     left: 350px;
@@ -176,21 +177,21 @@ ion-toolbar.header {
   
   
   .add-review-card {
-    margin-top: 450px; 
     position: fixed;
-    top: -50px; 
-    left: 50%;
-    transform: translateX(-50%);
+    top: 50%; /* يجعلها في منتصف الشاشة عموديًا */
+    left: 50%; /* يجعلها في منتصف الشاشة أفقيًا */
+    transform: translate(-50%, -50%); /* يحرك الكارد بحيث يكون تمامًا في المنتصف */
     width: 100%;
     max-width: 500px;
-    background: rgba($color: #e3d9d9c4, $alpha: 1.0); 
-    opacity: 1; 
+    background: rgba(239, 236, 236, 0.98); /* تم تعديل rgba ليكون صالحًا */
+    opacity: 1;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(46, 45, 45, 0.005);
-    z-index: 200; 
-    padding: 20px; 
-    height: auto; 
-  }
+    box-shadow: 0 4px 8px rgba(46, 45, 45, 0.05);
+    z-index: 200;
+    padding: 20px;
+    height: auto;
+}
+
   
   ion-card-title {
     font-size: 24px; 
@@ -204,12 +205,7 @@ ion-toolbar.header {
     margin-bottom: 10px; 
     color: #000000; 
   }
-  ion-input{
-    font-size: 20px; 
-    font-weight: bold;
-    color: #dedddd6f; 
-  }
-  
+
   .add-review-card ion-item {
     margin-bottom: 15px;
   }
@@ -239,9 +235,10 @@ ion-toolbar.header {
   p.artist{
     padding-top: 10px;
   }
-  .add-review-card ion-textarea,
-  .add-review-card ion-input {
-    color: rgb(94, 93, 93); 
+   ion-textarea,
+   ion-input {
+    color: rgb(39, 39, 39); 
+    --background-color: #d4d2d299 !important;
   
   }
   
