@@ -1,0 +1,75 @@
+
+<ion-header>
+  <ion-toolbar class="header">
+    <ion-button slot="start" class="back-button" routerLink="/list-painting">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-button>
+    <img src="assets/icon/logo2.png" class="img-style" alt="Logo" />
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+ 
+  <ion-card *ngIf="paintingDetails">
+    <ion-img [src]="paintingDetails.primaryImage" alt="Artwork Image"></ion-img>
+    <ion-card-header>
+     
+     
+      
+      
+      <ion-card-title>{{ paintingDetails.title }}</ion-card-title>
+      <ion-card-subtitle class="date-num">{{ paintingDetails.objectDate }}</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <p class="artist"><strong>Artist:</strong> {{ paintingDetails.artistDisplayName }}</p>
+      <p><strong>Material:</strong> {{ paintingDetails.medium }}</p>
+      <p><strong>Dimensions:</strong>{{ paintingDetails.dimensions }}</p>
+      
+      <h2 class="reviews-title">Reviews  ({{ comments.length }})</h2>
+
+      <div class="comments-section">
+        <div *ngFor="let comment of displayComments" class="comment">
+          <div *ngIf="comment.comment?.trim() && comment.username?.trim() && comment.creation_date">
+            <div class="comment-header">
+              <strong>{{ comment.username }}</strong>
+              <span class="comment-time">{{ comment.formattedDate || 'No Date Available' }}</span>
+            </div>
+            <div class="comment-body">
+              {{ comment.comment || 'No Comment Provided' }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="comments-header" *ngIf="comments.length > 3">
+        <ion-label class="view-all-comments" (click)="toggleComments()">
+          {{ showAllComments ? 'Show Less' : 'View All Comments' }}
+        </ion-label>
+      </div>
+
+      <ion-spinner *ngIf="!paintingDetails" name="crescent"></ion-spinner>
+      <p *ngIf="!paintingDetails" class="loading-message">Loading painting details...</p>
+    </ion-card-content>
+    <ion-button name="create-outline" class="add-comment" (click)="openReviewForm()" > Add Review</ion-button>
+  </ion-card>
+
+  <ion-card *ngIf="showReviewForm" class="add-review-card">
+    <ion-card-header>
+      <ion-card-title class="write-review">Write a Review</ion-card-title>
+      <button class="close-button" (click)="showReviewForm = false">&times;</button>
+    </ion-card-header>
+    
+    <ion-card-content>
+      <h3>Name</h3>
+      <ion-item>
+        <ion-input [(ngModel)]="reviewName" placeholder="Write here"></ion-input>
+      </ion-item>
+      <h3>Review</h3>
+      <ion-item>
+        <ion-textarea [(ngModel)]="reviewText" placeholder="Write here"></ion-textarea>
+      </ion-item>
+      <ion-button expand="full" (click)="addReview()">Submit</ion-button>
+    </ion-card-content>
+  </ion-card>
+  
